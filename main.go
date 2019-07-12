@@ -92,11 +92,12 @@ func Gen(
 					continue
 				}
 				for i, tplTypeName := range template.Args {
-					if tplTypeName == typeSpec.Name.Name {
-						obj := pkg.TypesInfo.Defs[typeSpec.Name]
-						mappings[obj] = args[i]
-						typeDecls[decl] = true
+					if tplTypeName != typeSpec.Name.Name {
+						continue
 					}
+					obj := pkg.TypesInfo.Defs[typeSpec.Name]
+					mappings[obj] = args[i]
+					typeDecls[decl] = true
 				}
 			}
 		}
