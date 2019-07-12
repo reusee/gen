@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"go/ast"
 	"go/format"
 	"go/types"
@@ -24,8 +23,6 @@ type Template struct {
 	Args []string
 }
 
-var pt = fmt.Printf
-
 func main() {
 	src, err := Gen(
 		os.Args[1],
@@ -34,7 +31,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	println(strings.Repeat("-", 32))
 	println(src)
 }
 
@@ -95,7 +91,6 @@ func Gen(
 						obj := pkg.TypesInfo.Defs[typeSpec.Name]
 						mappings[obj] = args[i]
 						typeDecls[decl] = true
-						pt("map %v to %s\n", tplTypeName, args[i])
 					}
 				}
 			}
@@ -140,7 +135,6 @@ func Gen(
 			if ident == nil {
 				continue
 			}
-			pt("rename %s to %s\n", ident.Name, name)
 			obj := pkg.TypesInfo.Defs[ident]
 			mappings[obj] = name
 
@@ -181,7 +175,7 @@ func Gen(
 			if err != nil {
 				return
 			}
-			buf.WriteString("\n\n")
+			buf.WriteString("\n")
 		}
 	}
 	src = buf.String()
