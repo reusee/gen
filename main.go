@@ -16,6 +16,11 @@ var templates = map[string]Template{
 		Path: "github.com/reusee/gen/map",
 		Args: []string{"Name", "Key", "Value"},
 	},
+
+	"heap": {
+		Path: "github.com/reusee/gen/heap",
+		Args: []string{"T"},
+	},
 }
 
 type Template struct {
